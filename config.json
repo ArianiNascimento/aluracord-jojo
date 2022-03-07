@@ -1,5 +1,5 @@
 {
-    "name": "Aluracord - Jojo (Ariani Nascimento)",
+    "name": "Aluracord - Jojo",
     "theme": {
       "colors": {
         "primary": {
@@ -8,8 +8,8 @@
           "200": "#A3D9A5",
           "300": "#7BC47F",
           "400": "#57AE5B",
-          "500": "#D255D4",
-          "600": "#2F8132",
+          "500": "#ffa4d2",
+          "600": "#ff3c9f",
           "700": "#207227",
           "800": "#0E5814",
           "900": "#05400A"

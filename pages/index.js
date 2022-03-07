@@ -1,35 +1,7 @@
 import { Box, Button, Text, TextField, Image } from '@skynexui/components';
+import { useState } from 'react';
 import appConfig from '../config.json';
-//import background from '../src/838260.png';
-
-function GlobalStyle() {
-    return (
-      <style global jsx>{`
-        * {
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
-          list-style: none;
-        }
-        body {
-          font-family: 'Century Gothic';
-        }
-        /* App fit Height */ 
-        html, body, #__next {
-          min-height: 100vh;
-          display: flex;
-          flex: 1;
-        }
-        #__next {
-          flex: 1;
-        }
-        #__next > * {
-          flex: 1;
-        }
-        /* ./App fit Height */ 
-      `}</style>
-    );
-  }
+import {useRouter} from 'next/router';
 
 function Titulo(props) {
     console.log(props);
@@ -51,7 +23,6 @@ function Titulo(props) {
 /*function HomePage() {
     return (
         <div>
-           <GlobalStyle/>
            <Title tag="h2">Bem-vindo(a)!</Title>
            <h2>Discord Jojo - Alura</h2>
         </div>
@@ -61,11 +32,10 @@ function Titulo(props) {
 export default HomePage*/
 
 export default function PaginaInicial() {
-    const username = 'ArianiNascimento';
+    const [username, setUsername] = useState('');
+    const roteamento = useRouter();
   
     return (
-      <>
-        <GlobalStyle />
         <Box
           styleSheet={{
             display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -92,6 +62,12 @@ export default function PaginaInicial() {
             {/* Formulário */}
             <Box
               as="form"
+              onSubmit ={function (infosDoEvento) {
+                infosDoEvento.preventDefault();
+                console.log('Alguém submeteu o form');
+                roteamento.push('/chat');
+              }}
+
               styleSheet={{
                 display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
                 width: { xs: '100%', sm: '50%' }, textAlign: 'center', marginBottom: '32px',
@@ -102,7 +78,13 @@ export default function PaginaInicial() {
                 {appConfig.name}
               </Text>
   
-              <TextField
+              <TextField value={username}
+                onChange={function Handler(event) {
+                console.log('usuário digitou'), event.target.value;
+                const valor = event.target.value;
+                setUsername(valor);
+                }}
+
                 fullWidth
                 textFieldColors={{
                   neutral: {
@@ -113,12 +95,13 @@ export default function PaginaInicial() {
                   },
                 }}
               />
+
               <Button
                 type='submit'
                 label='Entrar'
                 fullWidth
                 buttonColors={{
-                  contrastColor: appConfig.theme.colors.neutrals["000"],
+                  contrastColor: appConfig.theme.colors.neutrals["999"],
                   mainColor: appConfig.theme.colors.primary[500],
                   mainColorLight: appConfig.theme.colors.primary[400],
                   mainColorStrong: appConfig.theme.colors.primary[600],
@@ -166,6 +149,5 @@ export default function PaginaInicial() {
             {/* Photo Area */}
           </Box>
         </Box>
-      </>
     );
   }
